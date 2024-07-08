@@ -1,13 +1,54 @@
 import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Logo, PasswordIcon, SignBgImg, UserIcon} from '../../assets';
 import {ScreenHeight, ScreenWidth} from '../../utils/Constant';
 import InputBox from '../../Components/InputBox';
 import CustomBtn from '../../Components/CustomBtn';
+import {useAuthStore} from '../../Store/useStore';
 
 type Props = {};
 
 const LoginSrc = (props: Props) => {
+  const [userInfo, setUserInfo] = useState({username: '', password: ''});
+
+  const {loggedIn, login} = useAuthStore();
+
+  // Call api
+
+  const onSubmitHandler = async () => {
+    const url = 'https://api.hidromas.nl/user-login';
+    const apiKey = 'hidromas-we-app-01~c^Dt0Oc32';
+    const email = userInfo.username;
+    const password = userInfo.password;
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: apiKey,
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+
+      if (data?.msg === 'Success') {
+        login(data?.data);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      // Handle error cases here
+    }
+  };
+
   return (
     <View style={{flex: 1}}>
       <StatusBar
@@ -41,7 +82,9 @@ const LoginSrc = (props: Props) => {
           resizeMode={'contain'}
           style={{width: ScreenWidth * 0.4, height: ScreenHeight * 0.04}}
         />
-        <Text style={{fontWeight: '700', fontSize: 30}}>Sign In</Text>
+        <Text style={{fontWeight: '700', fontSize: 30, color: 'black'}}>
+          Sign In
+        </Text>
       </View>
 
       <View
@@ -69,7 +112,10 @@ const LoginSrc = (props: Props) => {
             }}>
             Username
           </Text>
-          <InputBox source={UserIcon} />
+          <InputBox
+            onChangeText={e => setUserInfo(prev => ({...prev, username: e}))}
+            source={UserIcon}
+          />
 
           <View style={{paddingVertical: 15}} />
           <Text
@@ -81,7 +127,11 @@ const LoginSrc = (props: Props) => {
             }}>
             Password
           </Text>
-          <InputBox source={PasswordIcon} type={'password'} />
+          <InputBox
+            onChangeText={e => setUserInfo(prev => ({...prev, password: e}))}
+            source={PasswordIcon}
+            type={'password'}
+          />
 
           <Text
             style={{
@@ -94,7 +144,12 @@ const LoginSrc = (props: Props) => {
             Forgot Password?
           </Text>
           <View style={{paddingVertical: 15}} />
-          <CustomBtn title="Sign In" />
+          <CustomBtn
+            onPress={() => {
+              onSubmitHandler();
+            }}
+            title="Sign In"
+          />
 
           <Text
             style={{

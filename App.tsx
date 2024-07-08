@@ -1,16 +1,19 @@
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeSrc from './src/Screen/UserSrc/HomeSrc';
 import LoginSrc from './src/Screen/AuthSrc/LoginSrc';
+import {useAuthStore} from './src/Store/useStore';
 
 type Props = {};
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const App = (props: Props) => {
+  const {loggedIn, data} = useAuthStore();
+
   const MyDrawer = () => {
     return (
       <Drawer.Navigator screenOptions={{headerShown: false}}>
@@ -19,11 +22,9 @@ const App = (props: Props) => {
     );
   };
 
-  const isLogIn = true;
-
   return (
     <NavigationContainer>
-      {isLogIn ? (
+      {loggedIn ? (
         <MyDrawer />
       ) : (
         <Stack.Navigator

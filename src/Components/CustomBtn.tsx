@@ -4,11 +4,13 @@ import {ScreenHeight} from '../utils/Constant';
 
 type Props = {
   title?: string;
+  onPress?: () => void;
 };
 
-const CustomBtn = ({title}: Props) => {
+const CustomBtn = ({title, onPress}: Props) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       activeOpacity={0.7}
       style={{
         backgroundColor: '#3130D7',

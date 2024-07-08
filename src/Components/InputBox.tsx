@@ -11,9 +11,13 @@ import React, {useState} from 'react';
 import {EyeCloseIcon, EyeOpenIcon, UserIcon} from '../assets';
 import {ScreenHeight} from '../utils/Constant';
 
-type Props = {type?: 'password'; source?: ImageSourcePropType | undefined};
+type Props = {
+  type?: 'password';
+  source?: ImageSourcePropType | undefined;
+  onChangeText: (e: string) => void;
+};
 
-const InputBox = ({type, source}: Props) => {
+const InputBox = ({type, source, onChangeText}: Props) => {
   const [show, setShow] = useState(type === 'password' ? true : false);
   return (
     <View
@@ -32,7 +36,8 @@ const InputBox = ({type, source}: Props) => {
         resizeMode="cover"
       />
       <TextInput
-        style={{flex: 1, fontSize: 16, fontWeight: '500'}}
+        onChangeText={onChangeText}
+        style={{flex: 1, color: 'black', fontSize: 16, fontWeight: '500'}}
         secureTextEntry={show}
       />
 
