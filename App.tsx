@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeSrc from './src/Screen/UserSrc/HomeSrc';
+import LoginSrc from './src/Screen/AuthSrc/LoginSrc';
 
 type Props = {};
 
@@ -19,7 +20,10 @@ const App = (props: Props) => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        initialRouteName="LoginSrc"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="LoginSrc" component={LoginSrc} />
         <Stack.Screen name="Home" component={HomeSrc} />
       </Stack.Navigator>
     </NavigationContainer>

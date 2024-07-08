@@ -1,17 +1,108 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Logo, PasswordIcon, SignBgImg, UserIcon} from '../../assets';
+import {ScreenHeight, ScreenWidth} from '../../utils/Constant';
+import InputBox from '../../Components/InputBox';
+import CustomBtn from '../../Components/CustomBtn';
 
 type Props = {};
 
 const LoginSrc = (props: Props) => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{flex: 1}}>
       <StatusBar
         translucent
-        backgroundColor={'#f2f2f2'}
+        backgroundColor="transparent"
         barStyle={'dark-content'}
       />
-      <Text>Home Screen</Text>
+      {/* Main Container */}
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'space-evenly',
+          height: ScreenHeight * 0.4,
+        }}>
+        {/* Bg Image */}
+        <Image
+          source={SignBgImg}
+          resizeMode={'cover'}
+          style={{
+            width: ScreenWidth,
+            height: ScreenHeight * 0.4,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: -10,
+          }}
+        />
+        {/* Logo */}
+        <Image
+          source={Logo}
+          resizeMode={'contain'}
+          style={{width: ScreenWidth * 0.4, height: ScreenHeight * 0.04}}
+        />
+        <Text style={{fontWeight: '700', fontSize: 30}}>Sign In</Text>
+      </View>
+
+      <View
+        style={{
+          height: ScreenHeight * 0.59,
+          position: 'absolute',
+          bottom: 0,
+          backgroundColor: '#f2f2f2',
+          width: ScreenWidth,
+          borderTopRightRadius: 20,
+          borderTopLeftRadius: 20,
+          paddingHorizontal: ScreenWidth * 0.06,
+          flex: 1,
+          paddingVertical: ScreenHeight * 0.04,
+        }}>
+        {/* Login Components */}
+        <Text
+          style={{
+            textAlign: 'left',
+            paddingVertical: 6,
+            color: 'black',
+            paddingHorizontal: 10,
+          }}>
+          Username
+        </Text>
+        <InputBox source={UserIcon} />
+        <View style={{paddingVertical: 15}} />
+        <Text
+          style={{
+            textAlign: 'left',
+            paddingVertical: 4,
+            color: 'black',
+            paddingHorizontal: 10,
+          }}>
+          Password
+        </Text>
+        <InputBox source={PasswordIcon} type={'password'} />
+
+        <Text
+          style={{
+            textAlign: 'right',
+            paddingVertical: 6,
+            color: 'black',
+            paddingHorizontal: 10,
+            fontWeight: '600',
+          }}>
+          Forgot Password?
+        </Text>
+        <View style={{paddingVertical: 15}} />
+        <CustomBtn title="Sign In" />
+
+        <Text
+          style={{
+            bottom: 30,
+            position: 'absolute',
+            marginLeft: '45%',
+            color: 'darkblue',
+          }}>
+          version 0.1
+        </Text>
+      </View>
     </View>
   );
 };
