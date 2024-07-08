@@ -56,52 +56,55 @@ const LoginSrc = (props: Props) => {
           paddingHorizontal: ScreenWidth * 0.06,
           flex: 1,
           paddingVertical: ScreenHeight * 0.04,
+          alignItems: 'center',
         }}>
         {/* Login Components */}
-        <Text
-          style={{
-            textAlign: 'left',
-            paddingVertical: 6,
-            color: 'black',
-            paddingHorizontal: 10,
-          }}>
-          Username
-        </Text>
-        <InputBox source={UserIcon} />
-        <View style={{paddingVertical: 15}} />
-        <Text
-          style={{
-            textAlign: 'left',
-            paddingVertical: 4,
-            color: 'black',
-            paddingHorizontal: 10,
-          }}>
-          Password
-        </Text>
-        <InputBox source={PasswordIcon} type={'password'} />
+        <View style={{width: ScreenWidth * 0.85}}>
+          <Text
+            style={{
+              textAlign: 'left',
+              paddingVertical: 6,
+              color: 'black',
+              paddingHorizontal: 10,
+            }}>
+            Username
+          </Text>
+          <InputBox source={UserIcon} />
 
-        <Text
-          style={{
-            textAlign: 'right',
-            paddingVertical: 6,
-            color: 'black',
-            paddingHorizontal: 10,
-            fontWeight: '600',
-          }}>
-          Forgot Password?
-        </Text>
-        <View style={{paddingVertical: 15}} />
-        <CustomBtn title="Sign In" />
+          <View style={{paddingVertical: 15}} />
+          <Text
+            style={{
+              textAlign: 'left',
+              paddingVertical: 4,
+              color: 'black',
+              paddingHorizontal: 10,
+            }}>
+            Password
+          </Text>
+          <InputBox source={PasswordIcon} type={'password'} />
 
-        <Text
-          style={{
-            bottom: 30,
-            position: 'absolute',
-            marginLeft: '45%',
-            color: 'darkblue',
-          }}>
-          version 0.1
-        </Text>
+          <Text
+            style={{
+              textAlign: 'right',
+              paddingVertical: 6,
+              color: 'black',
+              paddingHorizontal: 10,
+              fontWeight: '600',
+            }}>
+            Forgot Password?
+          </Text>
+          <View style={{paddingVertical: 15}} />
+          <CustomBtn title="Sign In" />
+
+          <Text
+            style={{
+              color: 'darkblue',
+              textAlign: 'center',
+              bottom: -ScreenHeight * 0.09,
+            }}>
+            version 0.1
+          </Text>
+        </View>
       </View>
     </View>
   );

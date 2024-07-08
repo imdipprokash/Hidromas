@@ -11,7 +11,7 @@ const CustomBtn = ({title}: Props) => {
     <TouchableOpacity
       activeOpacity={0.7}
       style={{
-        backgroundColor: 'darkblue',
+        backgroundColor: '#3130D7',
         borderRadius: 16,
         height: ScreenHeight * 0.07,
         alignItems: 'center',
