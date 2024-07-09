@@ -6,6 +6,8 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeSrc from './src/Screen/UserSrc/HomeSrc';
 import LoginSrc from './src/Screen/AuthSrc/LoginSrc';
 import {useAuthStore} from './src/Store/useStore';
+import CustomDrawer from './CustomDrawer';
+import {ScreenHeight} from './src/utils/Constant';
 
 type Props = {};
 const Stack = createNativeStackNavigator();
@@ -16,8 +18,18 @@ const App = (props: Props) => {
 
   const MyDrawer = () => {
     return (
-      <Drawer.Navigator screenOptions={{headerShown: false}}>
-        <Drawer.Screen name="Home" component={HomeSrc} />
+      <Drawer.Navigator
+        drawerContent={props => <CustomDrawer {...props} />}
+        screenOptions={{
+          headerShown: false,
+          drawerStyle: {
+            backgroundColor: '#c6cbef',
+            top: 0,
+          },
+        }}>
+        <Drawer.Screen name="Settings" component={HomeSrc} />
+        <Drawer.Screen name="Check-Ins" component={HomeSrc} />
+        <Drawer.Screen name="My Expenses" component={HomeSrc} />
       </Drawer.Navigator>
     );
   };
